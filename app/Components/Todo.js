@@ -61,10 +61,10 @@ const Todo = () => {
   const toggle = (id) => {
     setTodoList((prevTodos) => {
       return prevTodos.map((todo) => {
-        if (todo.id === id) {    // if the current todo item has the same id as the one passed into the function.
+        if (todo.id === id) {    
           return { ...todo, isComplete: !todo.isComplete };
         }
-        return todo;   // If the id does not match, the current todo object is returned unchanged.
+        return todo;   
       });
     });
   };

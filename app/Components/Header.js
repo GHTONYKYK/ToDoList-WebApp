@@ -3,7 +3,6 @@ import Link from "next/link";
 import NavLink from "./NavLinks";
 import { useState, useEffect } from "react";
 
-// Add your navigation links
 const navLinks = [
   {
     title: "Log in",
@@ -23,13 +22,11 @@ const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
-  // Effect to apply the theme on page load
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme); // Save the theme choice
+    localStorage.setItem('theme', theme); 
   }, [theme]);
 
-  // Function to toggle the theme
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
