@@ -1,4 +1,4 @@
-// File: C:\Users\jinna\Desktop\jin3\ToDoList-WebApp\app\layout.js
+// File: C:\Users\yunju\ToDoList-WebApp\app\layout.js
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

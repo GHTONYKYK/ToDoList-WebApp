@@ -80,10 +80,10 @@ useEffect(()=>{
 
 
   return (
-    <div className="bg-white place-self-center w-11/12 max-w-md flex flex-col p-7 h-[600px] rounded-xl">
-      <div className="flex items-center mt-7 gap-2">
+    <div className="mt-20 border border-[#33353F] place-self-center w-11/12 max-w-md flex flex-col p-8 h-[560px] rounded-xl">
+      <div className="flex items-center gap-2">
         <Image src="/todo_icon.png" width={40} height={40} alt="todo_icon" />
-        <h1 className="text-3xl font-semibold text-blue-800">To DO List</h1>
+        <h1 className=" text-3xl font-semibold ">To DO List</h1>
       </div>
 
       <div className="flex items-center my-7 bg-gray-300 rounded-full text-blue-700">
