@@ -5,7 +5,18 @@ import TodoItems from './TodoItems';
 import { useState, useRef , useEffect} from 'react';
 
 const Todo = () => {
-  const [todoList, setTodoList] = useState(localStorage.getItem("todos")? JSON.parse(localStorage.getItem("todos")) : []);
+
+  const defaultTodos = [
+    {
+      id: Date.now(),
+      text: "Giving them good grade",
+      isComplete: false,
+    },
+  ];
+
+
+  
+  const [todoList, setTodoList] = useState(localStorage.getItem("todos")? JSON.parse(localStorage.getItem("todos")) : defaultTodos);
   const inputRef = useRef();
 
   // useRef is used to get the value of input field
@@ -71,7 +82,7 @@ useEffect(()=>{
   return (
     <div className="bg-white place-self-center w-11/12 max-w-md flex flex-col p-7 h-[600px] rounded-xl">
       <div className="flex items-center mt-7 gap-2">
-        <Image src="/todo_icon.png" width={20} height={20} alt="todo_icon" />
+        <Image src="/todo_icon.png" width={40} height={40} alt="todo_icon" />
         <h1 className="text-3xl font-semibold text-blue-800">To DO List</h1>
       </div>
 

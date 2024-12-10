@@ -2,11 +2,12 @@
 import Link from "next/link";
 import NavLink from "./NavLinks";
 import { useState } from "react";
+ 
 
 const navLinks = [
     {
         title: "Log in",
-        path: "/login"
+        path: "/ComponentLogIn/page"
     },
     {
         title: "Log out",
@@ -26,27 +27,11 @@ const Navbar = () => {
             <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-4 py-2">
                 <Link
                     href={"/"}
-                    className="text-2xl md:text-5xl text-white font-semibold"
+                    className="text-xl md:text-3xl text-white font-semibold"
                 >
                     Welcome to Aaron's TodoList 
                 </Link>
-                <div className="mobile-menu block md:hidden">
-                    {!navbarOpen ? (
-                        <button
-                            onClick={() => setNavbarOpen(true)}
-                            className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white"
-                        >
-                            Open
-                        </button>
-                    ) : (
-                        <button
-                            onClick={() => setNavbarOpen(false)}
-                            className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white"
-                        >
-                            Close
-                        </button>
-                    )}
-                </div>
+           
                 <div className={`menu ${navbarOpen ? "block" : "hidden"} md:block md:w-auto`} id="navbar">
                     <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 mt-0">
                         {navLinks.map((link, index) => (
