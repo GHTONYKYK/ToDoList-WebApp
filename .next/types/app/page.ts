@@ -1,4 +1,4 @@
-// File: C:\Users\jinna\Desktop\jin3\ToDoList-WebApp\app\page.js
+// File: C:\ToDoList-WebApp\app\page.js
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
