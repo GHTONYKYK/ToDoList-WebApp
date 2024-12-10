@@ -12,3 +12,8 @@ const Footer = () => {
 };
 
 export default Footer;
+
+
+//npm install next react react-dom
+
+//
