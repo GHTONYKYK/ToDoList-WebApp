@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import TodoItems from "./TodoItems";
-import { useState, useRef, useEffect } from "react";
 
 const Todo = () => {
   const defaultTodos = [
@@ -13,66 +12,58 @@ const Todo = () => {
     },
   ];
 
-  const [todoList, setTodoList] = useState(
-    localStorage.getItem("todos")
-      ? JSON.parse(localStorage.getItem("todos"))
-      : defaultTodos
-  );
+  const [todos, setTodos] = useState([]);
   const inputRef = useRef();
 
-  // useRef is used to get the value of input field
-  //  const [todoList, setTodoList] = useState(localStorage.getItem); is save to data to local localStorage
-  //save the data to local localStorage, and empty array
-  //when ever close and open web , we get the data from local localStorage
-  //JSON.parse(localStorage.getItem("todos")) parses the JSON string retrieved from local storage into a JavaScript array if it exists.
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedTodos = localStorage.getItem("todos");
+      if (savedTodos) {
+        setTodos(JSON.parse(savedTodos));
+      } else {
+        setTodos(defaultTodos);
+      }
+    }
+  }, []);
+
+  const saveTodos = (newTodos) => {
+    setTodos(newTodos);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("todos", JSON.stringify(newTodos));
+    }
+  };
 
   const add = () => {
     const inputText = inputRef.current.value;
-    //inputRef.current accesses the current DOM element that inputRef is pointing to.
-    //inputRef.current.value retrieves the current value of that input element.
     if (inputText === "") {
       return null;
     }
 
     const newTodo = {
-      id: Date.now(), //Date.now() is a JavaScript method that returns the number of milliseconds elapsed since January 1, 1970, 00:00:00 UTC (the Unix epoch).
-      text: inputText, //id: Date.now(), you often need to assign a unique key to each item. Using Date.now() can provide a simple solution to create unique keys for each item.
+      id: Date.now(),
+      text: inputText,
       isComplete: false,
     };
-    setTodoList((prev) => [...prev, newTodo]); //(prev) => [...prev, newTodo] is a function that takes the previous state
-    //(prev) as an argument and returns a new array.
-    //newTodo is added to the end of the new array.
+    saveTodos((prev) => [...prev, newTodo]);
     inputRef.current.value = "";
-    //inputRef.current.value = "" sets the value of that input element to an empty string.
-    //inputRef.current.value = ""; clears any text that was previously entered in the input field.
   };
 
   const deleteTodo = (id) => {
-    setTodoList((prevTodos) => {
+    saveTodos((prevTodos) => {
       return prevTodos.filter((todo) => todo.id !== id);
     });
   };
-  //prevTodos.filter((todo) => todo.id !== id) creates a new array by filtering out the to-do item with the matching id.
-  //(todo) => todo.id !== id is a callback function that checks if the id of each todo item does not match the given id.
-  //The filter method includes only those todo items for which the condition (todo.id !== id) is true.
-  //prevTodos.filter(...) creates a new list of to-dos, but it skips the to-do with the matching id.
-  //.filter((todo) => todo.id !== id) means: "Keep all to-dos except the one with the given id."
 
   const toggle = (id) => {
-    setTodoList((prevTodos) => {
+    saveTodos((prevTodos) => {
       return prevTodos.map((todo) => {
         if (todo.id === id) {
-          // if the current todo item has the same id as the one passed into the function.
           return { ...todo, isComplete: !todo.isComplete };
         }
-        return todo; // If the id does not match, the current todo object is returned unchanged.
+        return todo;
       });
     });
   };
-
-  useEffect(() => {
-    localStorage.setItem("todoList", JSON.stringify(todoList));
-  }, [todoList]);
 
   return (
     <div className="bg-white dark:bg-gray-800 text-black dark:text-white place-self-center w-11/12 max-w-md flex flex-col p-7 h-[600px] rounded-xl">
@@ -99,7 +90,7 @@ const Todo = () => {
       </div>
 
       <ul className="flex-1 overflow-y-auto">
-        {todoList.map((item, index) => {
+        {todos.map((item, index) => {
           return (
             <TodoItems
               className="text-blue-800"
