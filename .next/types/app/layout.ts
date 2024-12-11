@@ -1,4 +1,4 @@
-// File: C:\ToDoList-WebApp\app\layout.js
+// File: C:\cprg303\IncredibleToDoListApp\ToDoList-WebApp\app\layout.js
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

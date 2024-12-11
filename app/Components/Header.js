@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import NavLink from "./NavLinks";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   {
@@ -20,6 +20,19 @@ const navLinks = [
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   return (
     <nav className="fixed mx-auto border border-[#33353F] top-0 left-0 right-0 z-10 bg-gradient-to-r from-purple-500 to-indigo-500 shadow-lg">
@@ -48,6 +61,12 @@ const Navbar = () => {
             ))}
           </ul>
         </div>
+        <button
+          onClick={toggleTheme}
+          className="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-2 rounded"
+        >
+          {theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+        </button>
       </div>
     </nav>
   );
